@@ -22,11 +22,8 @@ enum custom_keycodes {
   LOWER,
   RAISE,
   ADJUST,
-  STENO,
-};
-
-enum macro_keycodes {
-  KC_SAMPLEMACRO,
+  PLON,
+  PLOFF,
 };
 
 #define ALT_ESC LALT_T(KC_ESC)
@@ -71,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_ADJUST] = LAYOUT( \
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-   TG(_STENO),   KC_F1,   KC_F2,   KC_F3,   KC_F4, KC_MPRV,                      KC_VOLU, KC_BTN1, KC_MS_U, KC_BTN2, KC_ACL0,   RESET,\
+         PLON,   KC_F1,   KC_F2,   KC_F3,   KC_F4, KC_MPRV,                      KC_VOLU, KC_BTN1, KC_MS_U, KC_BTN2, KC_ACL0,   RESET,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______,   KC_F5,   KC_F6,   KC_F7,   KC_F8, KC_MPLY,                      KC_MUTE, KC_MS_L, KC_MS_D, KC_MS_R, KC_ACL1, _______,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -83,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_STENO] = LAYOUT( \
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-   TG(_STENO),    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_LBRC,\
+        PLOFF,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_LBRC,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -205,6 +202,28 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_on(_ADJUST);
       } else {
         layer_off(_ADJUST);
+      }
+      return false;
+    case PLON:
+      if (record->event.pressed) {
+        layer_on(_STENO);
+        // send PHRO*PB - plover on
+        SEND_STRING(
+            SS_DOWN(X_E) SS_DOWN(X_R) SS_DOWN(X_F) SS_DOWN(X_V)
+            SS_DOWN(X_Y) SS_DOWN(X_I) SS_DOWN(X_K)
+            SS_UP(X_E) SS_UP(X_R) SS_UP(X_F) SS_UP(X_V)
+            SS_UP(X_Y) SS_UP(X_I) SS_UP(X_K));
+      }
+      return false;
+    case PLOFF:
+      if (record->event.pressed) {
+        layer_off(_STENO);
+        // send PHRO*F - plover off
+        SEND_STRING(
+            SS_DOWN(X_E) SS_DOWN(X_R) SS_DOWN(X_F) SS_DOWN(X_V)
+            SS_DOWN(X_Y) SS_DOWN(X_U)
+            SS_UP(X_E) SS_UP(X_R) SS_UP(X_F) SS_UP(X_V)
+            SS_UP(X_Y) SS_UP(X_U));
       }
       return false;
   }
