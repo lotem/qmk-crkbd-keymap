@@ -9,6 +9,7 @@ SRC +=  ./lib/glcdfont.c \
         # ./lib/timelogger.c \
 
 BOOTMAGIC_ENABLE = yes       # Virtual DIP switch configuration
-MOUSEKEY_ENABLE = yes       # Mouse keys
+MOUSEKEY_ENABLE = no       # Mouse keys
 EXTRAKEY_ENABLE = yes       # Audio control and System control
 NKRO_ENABLE = yes            # Nkey Rollover
+STENO_ENABLE = yes
