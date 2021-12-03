@@ -1,77 +1,26 @@
+/*
+Copyright 2019 @foostan
+Copyright 2020 Drashna Jaelre <@drashna>
+Copyright 2021 @lotem
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include QMK_KEYBOARD_H
 
-#ifdef RGBLIGHT_ENABLE
-//Following line allows macro to read current RGB settings
-extern rgblight_config_t rgblight_config;
-#endif
-
-extern uint8_t is_master;
-
-// Each layer gets a name for readability, which is then used in the keymap matrix below.
-// The underscores don't mean anything - you can have a layer called STUFF or any other name.
-// Layer names don't all need to be of the same length, obviously, and you can also skip them
-// entirely and just use numbers.
-#define _QWERTY 0
-#define _LOWER 1
-#define _RAISE 2
-#define _ADJUST 3
-#define _STENO 4
-
-enum custom_keycodes {
-  QWERTY = SAFE_RANGE,
-  LOWER,
-  RAISE,
-  ADJUST,
-  PLON,
-  PLOFF,
-};
-
-#ifdef STENO_ENABLE
-#include "keymap_steno.h"
-#define STN_ON TO(_STENO)
-#define STN_OFF TO(_QWERTY)
-#else
-#define STN_ON PLON
-#define STN_OFF PLOFF
-#define STN_N1 KC_1
-#define STN_N2 KC_2
-#define STN_N3 KC_3
-#define STN_N4 KC_4
-#define STN_N5 KC_5
-#define STN_N6 KC_6
-#define STN_N7 KC_7
-#define STN_N8 KC_8
-#define STN_N9 KC_9
-#define STN_NA KC_0
-#define STN_NB KC_MINS
-#define STN_NC KC_EQL
-#define STN_S1 KC_Q
-#define STN_S2 KC_A
-#define STN_TL KC_W
-#define STN_KL KC_S
-#define STN_PL KC_E
-#define STN_WL KC_D
-#define STN_HL KC_R
-#define STN_RL KC_F
-#define STN_ST1 KC_T
-#define STN_ST2 KC_G
-#define STN_ST3 KC_Y
-#define STN_ST4 KC_H
-#define STN_FR KC_U
-#define STN_RR KC_J
-#define STN_PR KC_I
-#define STN_BR KC_K
-#define STN_LR KC_O
-#define STN_GR KC_L
-#define STN_TR KC_P
-#define STN_SR KC_SCLN
-#define STN_DR KC_LBRC
-#define STN_ZR KC_QUOT
-#define STN_A KC_C
-#define STN_O KC_V
-#define STN_E KC_N
-#define STN_U KC_M
-#endif
+#define LOWER FN_MO13
+#define RAISE FN_MO23
 
 #define OS_CMD OSM(MOD_LGUI)
 #define ALT_ESC LALT_T(KC_ESC)
@@ -79,82 +28,58 @@ enum custom_keycodes {
 #define SFT_CAP RSFT_T(KC_CAPS)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_QWERTY] = LAYOUT( \
+  [0] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC, \
+       KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-       OS_CMD,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, ALT_QUO, \
+       OS_CMD,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, ALT_QUO,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, SFT_CAP, \
+      KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, SFT_CAP,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                            LOWER, KC_LCTL, ALT_ESC,     KC_ENT,  KC_SPC,   RAISE \
+                                            LOWER, KC_LCTL, ALT_ESC,     KC_ENT,  KC_SPC,   RAISE
                                       //`--------------------------'  `--------------------------'
   ),
 
-  [_LOWER] = LAYOUT( \
+  [1] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      KC_INS,  KC_EXLM,   KC_AT, KC_LCBR, KC_RCBR, KC_PIPE,                       KC_GRV, KC_AMPR, KC_ASTR, KC_TILD, KC_SLSH,  KC_DEL, \
+      KC_INS,  KC_EXLM,   KC_AT, KC_LCBR, KC_RCBR, KC_PIPE,                      KC_BSLS, KC_AMPR, KC_ASTR, KC_TILD,  KC_GRV,  KC_DEL,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCMD, KC_HASH,  KC_DLR, KC_LPRN, KC_RPRN,  KC_TAB,                      KC_QUOT, KC_MINS,  KC_EQL, KC_PLUS, KC_COLN, KC_RALT, \
+      KC_LCMD, KC_HASH,  KC_DLR, KC_LPRN, KC_RPRN, KC_SCLN,                      KC_UNDS, KC_MINS,  KC_DQT, KC_QUOT, KC_COLN, KC_RALT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, KC_PERC, KC_CIRC, KC_LBRC, KC_RBRC, KC_BSLS,                       KC_DQT, KC_UNDS, KC_LABK, KC_RABK, KC_QUES, KC_RSFT, \
+      _______, KC_PERC, KC_CIRC, KC_LBRC, KC_RBRC, KC_SLSH,                      KC_PLUS,  KC_EQL, KC_LABK, KC_RABK, KC_QUES, KC_RSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______, _______, _______,    _______, _______, _______ \
+                                          _______, _______, _______,    _______, _______, _______
                                       //`--------------------------'  `--------------------------'
   ),
 
-  [_RAISE] = LAYOUT( \
+  [2] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      KC_INS,     KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_DEL, \
+       KC_GRV,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_APP,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCMD,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,                      KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT,  KC_DOT, KC_RALT, \
+      KC_LCMD,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                      KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, KC_VOLU, KC_RALT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, KC_UNDO,  KC_CUT, KC_COPY, KC_PSTE, KC_FIND,                      KC_HOME,  KC_END, KC_PGUP, KC_PGDN, KC_SLSH, KC_RSFT, \
+      _______,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,                      KC_HOME,  KC_END, KC_PGUP, KC_PGDN, KC_VOLD, KC_RSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______, _______, _______,    _______, _______, _______ \
+                                          _______,  KC_F11,  KC_F12,    KC_MPLY, KC_MNXT, _______
                                       //`--------------------------'  `--------------------------'
   ),
 
-  [_ADJUST] = LAYOUT( \
+  [3] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       STN_ON,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                      KC_VOLU, KC_WH_D, KC_MS_U, KC_WH_U, KC_MPRV,   RESET, \
+        RESET,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                      XXXXXXX, KC_WH_D, KC_MS_U, KC_WH_U, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCMD,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,                      KC_MUTE, KC_MS_L, KC_MS_D, KC_MS_R, KC_MPLY, KC_RALT, \
+      KC_LCMD,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,                      XXXXXXX, KC_MS_L, KC_MS_D, KC_MS_R, XXXXXXX, KC_RALT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______,  KC_F11,  KC_F12, KC_PSCR, KC_SLCK, KC_PAUS,                      KC_VOLD, KC_BTN1, KC_BTN3, KC_BTN2, KC_MNXT, KC_RSFT, \
+      _______,  KC_F11,  KC_F12, KC_PSCR,RGB_RMOD, RGB_MOD,                      XXXXXXX, KC_BTN1, KC_BTN3, KC_BTN2, XXXXXXX, KC_RSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______, _______, _______,    _______, _______, _______ \
-                                      //`--------------------------'  `--------------------------'
-  ),
-
-  [_STENO] = LAYOUT( \
-  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      XXXXXXX,  STN_S1,  STN_TL,  STN_PL,  STN_HL, STN_ST1,                      STN_ST3,  STN_FR,  STN_PR,  STN_LR,  STN_TR,  STN_DR, \
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX,  STN_S2,  STN_KL,  STN_WL,  STN_RL, STN_ST2,                      STN_ST4,  STN_RR,  STN_BR,  STN_GR,  STN_SR,  STN_ZR, \
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      STN_OFF, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                           STN_NB,   STN_A,   STN_O,      STN_E,   STN_U,  STN_NC \
+                                          _______, _______, _______,    _______, _______, _______
                                       //`--------------------------'  `--------------------------'
   ),
 };
 
-void persistent_default_layer_set(uint16_t default_layer) {
-  eeconfig_update_default_layer(default_layer);
-  default_layer_set(default_layer);
-}
-
-// Setting ADJUST layer RGB back to default
-void update_tri_layer_RGB(uint8_t layer1, uint8_t layer2, uint8_t layer3) {
-  if (IS_LAYER_ON(layer1) && IS_LAYER_ON(layer2)) {
-    layer_on(layer3);
-  } else {
-    layer_off(layer3);
-  }
-}
-
 #ifdef OLED_ENABLE
+#include <stdio.h>
+
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   if (!is_keyboard_master()) {
     return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
@@ -250,69 +175,10 @@ void oled_task_user(void) {
     }
 }
 
-#endif // OLED_ENABLE
-
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-#ifdef OLED_ENABLE
-    if (record->event.pressed) {
-        set_keylog(keycode, record);
-    }
-#endif // OLED_ENABLE
-
-    switch (keycode) {
-        case QWERTY:
-            if (record->event.pressed) {
-                persistent_default_layer_set(1UL<<_QWERTY);
-            }
-            return false;
-        case LOWER:
-            if (record->event.pressed) {
-
-                layer_on(_LOWER);
-                update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
-            } else {
-                layer_off(_LOWER);
-                update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
-            }
-            return false;
-        case RAISE:
-            if (record->event.pressed) {
-                layer_on(_RAISE);
-                update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
-            } else {
-                layer_off(_RAISE);
-                update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
-            }
-            return false;
-        case ADJUST:
-            if (record->event.pressed) {
-                layer_on(_ADJUST);
-            } else {
-                layer_off(_ADJUST);
-            }
-            return false;
-        case PLON:
-            if (record->event.pressed) {
-                layer_on(_STENO);
-                // send PHRO*PB - plover on
-                SEND_STRING(
-                    SS_DOWN(X_E) SS_DOWN(X_R) SS_DOWN(X_F) SS_DOWN(X_V)
-                    SS_DOWN(X_Y) SS_DOWN(X_I) SS_DOWN(X_K)
-                    SS_UP(X_E) SS_UP(X_R) SS_UP(X_F) SS_UP(X_V)
-                    SS_UP(X_Y) SS_UP(X_I) SS_UP(X_K));
-            }
-            return false;
-        case PLOFF:
-            if (record->event.pressed) {
-                layer_off(_STENO);
-                // send PHRO*F - plover off
-                SEND_STRING(
-                    SS_DOWN(X_E) SS_DOWN(X_R) SS_DOWN(X_F) SS_DOWN(X_V)
-                    SS_DOWN(X_Y) SS_DOWN(X_U)
-                    SS_UP(X_E) SS_UP(X_R) SS_UP(X_F) SS_UP(X_V)
-                    SS_UP(X_Y) SS_UP(X_U));
-            }
-            return false;
-    }
-    return true;
+  if (record->event.pressed) {
+    set_keylog(keycode, record);
+  }
+  return true;
 }
+#endif // OLED_ENABLE
