@@ -95,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       KC_INS,  KC_EXLM,   KC_AT, KC_LCBR, KC_RCBR, KC_PIPE,                       KC_GRV, KC_AMPR, KC_ASTR, KC_TILD, KC_SLSH,  KC_DEL, \
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCMD, KC_HASH,  KC_DLR, KC_LPRN, KC_RPRN,  KC_TAB,                      KC_QUOT, KC_MINS, KC_PLUS,  KC_EQL, KC_COLN, KC_RALT, \
+      KC_LCMD, KC_HASH,  KC_DLR, KC_LPRN, KC_RPRN,  KC_TAB,                      KC_QUOT, KC_MINS,  KC_EQL, KC_PLUS, KC_COLN, KC_RALT, \
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, KC_PERC, KC_CIRC, KC_LBRC, KC_RBRC, KC_BSLS,                       KC_DQT, KC_UNDS, KC_LABK, KC_RABK, KC_QUES, KC_RSFT, \
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
