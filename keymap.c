@@ -28,8 +28,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define OS_RALT OSM(MOD_RALT)
 #define OS_LCMD OSM(MOD_LGUI)
 #define OS_RCMD OSM(MOD_RGUI)
-#define CMD_ESC CMD_T(KC_ESC)
-#define ALT_ENT ALT_T(KC_ENT)
+#define ALT_ESC ALT_T(KC_ESC)
+#define CMD_ENT CMD_T(KC_ENT)
 #define RSE_QUO LT(2, KC_QUOT)
 #define SFT_CAP RSFT_T(KC_CAPS)
 
@@ -42,7 +42,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, SFT_CAP,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                            LOWER, KC_LCTL, CMD_ESC,    ALT_ENT,  KC_SPC,   LOWER
+                                            LOWER, KC_LCTL, ALT_ESC,    CMD_ENT,  KC_SPC,   LOWER
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -66,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, KC_CAPS,  KC_APP, KC_PGUP, KC_PGDN, KC_BSPC,                       KC_DOT,    KC_1,    KC_2,    KC_3, KC_SLSH, KC_RSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______, OS_LCTL, OS_LCMD,    OS_LALT, _______, _______
+                                          _______, OS_LCTL, OS_LALT,    OS_LCMD, _______, _______
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -76,9 +76,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,                      KC_VOLD, KC_MS_L, KC_MS_D, KC_MS_R, RGB_MOD, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______,  KC_F11,  KC_F12, KC_PSCR, XXXXXXX, XXXXXXX,                      KC_MUTE, KC_BTN1, KC_BTN3, KC_BTN2, RGB_TOG, KC_RSFT,
+      _______,  KC_F11,  KC_F12, KC_PSCR, CG_TOGG, AG_TOGG,                      KC_MUTE, KC_BTN1, KC_BTN3, KC_BTN2, RGB_TOG, KC_RSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_MPRV, OS_RCTL, OS_RCMD,    OS_RALT, KC_MPLY, KC_MNXT
+                                          KC_MPRV, OS_RCTL, OS_RALT,    OS_RCMD, KC_MPLY, KC_MNXT
                                       //`--------------------------'  `--------------------------'
   ),
 };
