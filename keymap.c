@@ -72,13 +72,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [3] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-        RESET,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                      KC_VOLU, KC_WH_D, KC_MS_U, KC_WH_U,RGB_RMOD, KC_SLEP,
+        RESET,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                      KC_MPRV, KC_WH_U, KC_MS_U, KC_WH_D,RGB_RMOD, KC_SLEP,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,                      KC_VOLD, KC_MS_L, KC_MS_D, KC_MS_R, RGB_MOD, _______,
+      _______,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,                      KC_MPLY, KC_MS_L, KC_MS_D, KC_MS_R, RGB_TOG, KC_BTN3,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______,  KC_F11,  KC_F12, KC_PSCR, CG_TOGG, AG_TOGG,                      KC_MUTE, KC_BTN1, KC_BTN3, KC_BTN2, RGB_TOG, KC_RSFT,
+      _______,  KC_F11,  KC_F12, KC_PSCR, CG_TOGG, AG_TOGG,                      KC_MNXT, KC_MUTE, KC_VOLD, KC_VOLU, RGB_MOD, KC_RSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_MPRV, OS_RCTL, OS_RALT,    OS_RCMD, KC_MPLY, KC_MNXT
+                                          _______, OS_RCTL, OS_RALT,    OS_RCMD, KC_BTN1, KC_BTN2
                                       //`--------------------------'  `--------------------------'
   ),
 };
