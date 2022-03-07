@@ -19,8 +19,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 
-#define LOWER FN_MO13
-#define RAISE FN_MO23
+#define LOWER MO(1)
+#define RAISE MO(2)
+#define ADJUST MO(3)
 
 #define OS_LCTL OSM(MOD_LCTL)
 #define OS_RCTL OSM(MOD_RCTL)
@@ -28,21 +29,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define OS_RALT OSM(MOD_RALT)
 #define OS_LCMD OSM(MOD_LGUI)
 #define OS_RCMD OSM(MOD_RGUI)
-#define ALT_ESC ALT_T(KC_ESC)
-#define CMD_ENT CMD_T(KC_ENT)
-#define RSE_QUO LT(2, KC_QUOT)
-#define SFT_CAP RSFT_T(KC_CAPS)
+
+#define RSE_ESC LT(2, KC_ESC)
+#define RSE_ENT LT(2, KC_ENT)
+#define ALT_CAP LALT_T(KC_CAPS)
+#define CMD_QUO RCMD_T(KC_QUOT)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-        RAISE,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, RSE_QUO,
+      ALT_CAP,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, CMD_QUO,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, SFT_CAP,
+      KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                            LOWER, KC_LCTL, ALT_ESC,    CMD_ENT,  KC_SPC,   LOWER
+                                            LOWER, KC_LCTL, RSE_ESC,    RSE_ENT,  KC_SPC,   LOWER
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -50,23 +52,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       KC_INS,  KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_PIPE, KC_BSLS,  KC_DEL,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______,  KC_GRV, KC_QUOT, KC_LPRN, KC_RPRN,  KC_DQT,                      KC_PLUS, KC_MINS, KC_UNDS, KC_COLN, KC_SCLN,   RAISE,
+      _______,  KC_GRV, KC_QUOT, KC_LPRN, KC_RPRN,  KC_DQT,                      KC_PLUS, KC_MINS, KC_UNDS, KC_COLN, KC_SCLN, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, KC_TILD, KC_LBRC, KC_LCBR, KC_RCBR, KC_RBRC,                      KC_QUES,  KC_EQL, KC_LABK, KC_RABK, KC_SLSH, KC_RSFT,
+      _______, KC_TILD, KC_LBRC, KC_LCBR, KC_RCBR, KC_RBRC,                      KC_QUES,  KC_EQL, KC_LABK, KC_RABK, KC_SLSH, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______, _______, _______,    _______, _______, _______
+                                           ADJUST, OS_LCTL, OS_LALT,    OS_LCMD, _______,  ADJUST
                                       //`--------------------------'  `--------------------------'
   ),
 
   [2] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      _______,  KC_DEL, KC_HOME,   KC_UP,  KC_END,  KC_INS,                      KC_MINS,    KC_7,    KC_8,    KC_9,    KC_0, _______,
+      _______,  KC_INS, KC_HOME,   KC_UP,  KC_END,  KC_DEL,                      KC_MINS,    KC_7,    KC_8,    KC_9,    KC_0, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______,  KC_ESC, KC_LEFT, KC_DOWN, KC_RGHT,  KC_TAB,                      KC_COLN,    KC_4,    KC_5,    KC_6, KC_PERC, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, KC_CAPS,  KC_APP, KC_PGUP, KC_PGDN, KC_BSPC,                       KC_DOT,    KC_1,    KC_2,    KC_3, KC_SLSH, KC_RSFT,
+      _______, KC_CAPS,  KC_APP, KC_PGUP, KC_PGDN, KC_BSPC,                       KC_DOT,    KC_1,    KC_2,    KC_3, KC_SLSH, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______, OS_LCTL, OS_LALT,    OS_LCMD, _______, _______
+                                           ADJUST, OS_LCTL, OS_LALT,    OS_LCMD, _______,  ADJUST
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -74,11 +76,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
         RESET,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                      KC_MPRV, KC_WH_U, KC_MS_U, KC_WH_D,RGB_RMOD, KC_SLEP,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,                      KC_MPLY, KC_MS_L, KC_MS_D, KC_MS_R, RGB_TOG, KC_BTN3,
+      _______,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,                      KC_MPLY, KC_MS_L, KC_MS_D, KC_MS_R, RGB_TOG, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______,  KC_F11,  KC_F12, KC_PSCR, CG_TOGG, AG_TOGG,                      KC_MNXT, KC_MUTE, KC_VOLD, KC_VOLU, RGB_MOD, KC_RSFT,
+      _______,  KC_F11,  KC_F12, KC_PSCR, CG_TOGG, AG_TOGG,                      KC_MNXT, KC_MUTE, KC_VOLD, KC_VOLU, RGB_MOD, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______, OS_RCTL, OS_RALT,    OS_RCMD, KC_BTN1, KC_BTN2
+                                          KC_BTN3, OS_RCTL, OS_RALT,    OS_RCMD, KC_BTN1, KC_BTN2
                                       //`--------------------------'  `--------------------------'
   ),
 };
