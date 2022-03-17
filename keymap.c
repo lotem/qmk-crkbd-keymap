@@ -19,6 +19,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 
+#ifdef VIA_ENABLE
+#define STN_ON KC_TRNS
+#define STN_OFF KC_TRNS
+#else
+enum custom_keycodes {
+    PLON = SAFE_RANGE,
+    PLOFF,
+};
+
+#define _ALPHA 0
+#define _STENO 4
+
+#include "steno.h"
+#endif
+
 #define LOWER MO(1)
 #define RAISE MO(2)
 #define ADJUST MO(3)
@@ -50,9 +65,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [1] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      KC_INS,  KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_PIPE, KC_BSLS,  KC_DEL,
+       KC_INS, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_PIPE, KC_BSLS,  KC_DEL,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______,  KC_GRV, KC_QUOT, KC_LPRN, KC_RPRN,  KC_DQT,                      KC_PLUS, KC_MINS, KC_UNDS, KC_COLN, KC_SCLN, _______,
+       STN_ON,  KC_GRV, KC_QUOT, KC_LPRN, KC_RPRN,  KC_DQT,                      KC_PLUS, KC_MINS, KC_UNDS, KC_COLN, KC_SCLN, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, KC_TILD, KC_LBRC, KC_LCBR, KC_RCBR, KC_RBRC,                      KC_QUES,  KC_EQL, KC_LABK, KC_RABK, KC_SLSH, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -83,6 +98,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                           KC_BTN3, OS_RCTL, OS_RALT,    OS_RCMD, KC_BTN1, KC_BTN2
                                       //`--------------------------'  `--------------------------'
   ),
+
+#ifndef VIA_ENABLE
+  [4] = LAYOUT_split_3x6_3_include( STENO_LAYER ),
+#endif
 };
 
 #ifdef OLED_ENABLE
@@ -182,11 +201,23 @@ void oled_task_user(void) {
         oled_render_logo();
     }
 }
+#endif // OLED_ENABLE
+
+void matrix_init_user(void) {
+#ifdef STENO_ENABLE
+    matrix_init_user_steno();
+#endif
+}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  if (record->event.pressed) {
-    set_keylog(keycode, record);
-  }
-  return true;
+#ifdef OLED_ENABLE
+    if (record->event.pressed) {
+        set_keylog(keycode, record);
+    }
+#endif
+#ifndef VIA_ENABLE
+    return process_record_user_keyboard_steno(keycode, record);
+#else
+    return true;
+#endif
 }
-#endif // OLED_ENABLE
