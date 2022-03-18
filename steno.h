@@ -56,7 +56,7 @@
     /*|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|*/ \
         STN_OFF, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   \
     /*|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|*/ \
-    /**/                                     STN_NB,   STN_A,   STN_O,      STN_E,   STN_U,  STN_NC \
+    /**/                                      STN_A,   STN_O,  STN_NB,     STN_NC,   STN_E,   STN_U \
     /*                                    `--------------------------'  `--------------------------'*/
 
 void matrix_init_user_steno(void) {
