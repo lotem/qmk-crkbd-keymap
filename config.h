@@ -25,6 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define EE_HANDS
 
 #define FORCE_NKRO
+#define PERMISSIVE_HOLD
 
 #ifdef RGBLIGHT_ENABLE
 #    undef RGBLED_NUM
