@@ -19,10 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 
-#ifdef VIA_ENABLE
-#define STN_ON KC_TRNS
-#define STN_OFF KC_TRNS
-#else
+#ifdef STENO_LAYER_ENABLE
 enum custom_keycodes {
     PLON = SAFE_RANGE,
     PLOFF,
@@ -32,6 +29,9 @@ enum custom_keycodes {
 #define _STENO 4
 
 #include "steno.h"
+#else
+#define STN_ON KC_TRNS
+#define STN_OFF KC_TRNS
 #endif
 
 #define LOWER MO(1)
@@ -102,7 +102,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       //`--------------------------'  `--------------------------'
   ),
 
-#ifndef VIA_ENABLE
+#ifdef STENO_LAYER_ENABLE
   [4] = LAYOUT_split_3x6_3_include( STENO_LAYER ),
 #endif
 };
@@ -219,7 +219,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         set_keylog(keycode, record);
     }
 #endif
-#ifndef VIA_ENABLE
+#ifdef STENO_LAYER_ENABLE
     return process_record_user_keyboard_steno(keycode, record);
 #else
     return true;
