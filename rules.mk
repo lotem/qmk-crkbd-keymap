@@ -24,4 +24,5 @@ endif
 ifeq ($(strip $(USER_KEYBOARD_STENO_ENABLE)), yes)
 	SRC += features/steno.c
 	OPT_DEFS += -DUSER_KEYBOARD_STENO_ENABLE
+	VIA_ENABLE = no
 endif
