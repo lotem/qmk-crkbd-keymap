@@ -7,7 +7,12 @@ OLED_ENABLE = yes
 OLED_DRIVER = SSD1306
 
 ifeq ($(strip $(STENO_ENABLE)), yes)
-MOUSEKEY_ENABLE = no
-# By default, VIA only supports 4 layers thus conficts with the Steno feature.
-VIA_ENABLE = no
+	SRC += features/steno.c
+	MOUSEKEY_ENABLE = no
+	VIA_ENABLE = no
+endif
+
+ifeq ($(strip $(USER_KEYBOARD_STENO_ENABLE)), yes)
+	SRC += features/steno.c
+	OPT_DEFS += -DUSER_KEYBOARD_STENO_ENABLE
 endif

@@ -19,24 +19,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 
-#ifdef STENO_LAYER_ENABLE
+enum Layers {
+    _ALPHA,
+    _LOWER,
+    _RAISE,
+    _ADJUST,
+    _STENO,
+};
+
+#ifdef USER_KEYBOARD_STENO_ENABLE
 enum custom_keycodes {
     PLON = SAFE_RANGE,
     PLOFF,
 };
-
-#define _ALPHA 0
-#define _STENO 4
-
-#include "steno.h"
-#else
-#define STN_ON KC_TRNS
-#define STN_OFF KC_TRNS
 #endif
 
-#define LOWER MO(1)
-#define RAISE MO(2)
-#define ADJUST MO(3)
+#include "features/steno.h"
+
+#define LOWER MO(_LOWER)
+#define RAISE MO(_RAISE)
+#define ADJUST MO(_ADJUST)
 
 #define OS_LCTL OSM(MOD_LCTL)
 #define OS_RCTL OSM(MOD_RCTL)
@@ -53,8 +55,10 @@ enum custom_keycodes {
 #define ALT_CAP LALT_T(KC_CAPS)
 #define ALT_QUO RALT_T(KC_QUOT)
 
+#define LAYOUT_split_3x6_3_wrapper(...) LAYOUT_split_3x6_3(__VA_ARGS__)
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [0] = LAYOUT_split_3x6_3(
+  [_ALPHA] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -66,11 +70,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       //`--------------------------'  `--------------------------'
   ),
 
-  [1] = LAYOUT_split_3x6_3(
+  [_LOWER] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_INS, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_PIPE, KC_BSLS,  KC_DEL,
+       STN_ON, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_PIPE, KC_BSLS,  KC_DEL,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-       STN_ON,  KC_GRV, KC_QUOT, KC_LPRN, KC_RPRN,  KC_DQT,                      KC_PLUS, KC_MINS, KC_UNDS, KC_COLN, KC_SCLN, _______,
+      _______,  KC_GRV, KC_QUOT, KC_LPRN, KC_RPRN,  KC_DQT,                      KC_PLUS, KC_MINS, KC_UNDS, KC_COLN, KC_SCLN, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, KC_TILD, KC_LBRC, KC_LCBR, KC_RCBR, KC_RBRC,                      KC_QUES,  KC_EQL, KC_LABK, KC_RABK, KC_SLSH, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -78,7 +82,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       //`--------------------------'  `--------------------------'
   ),
 
-  [2] = LAYOUT_split_3x6_3(
+  [_RAISE] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       _______,  KC_INS, KC_HOME,   KC_UP,  KC_END,  KC_DEL,                      KC_PLUS,    KC_7,    KC_8,    KC_9,    KC_0, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -90,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       //`--------------------------'  `--------------------------'
   ),
 
-  [3] = LAYOUT_split_3x6_3(
+  [_ADJUST] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
         RESET,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                      KC_MPRV, KC_WH_U, KC_MS_U, KC_WH_D,RGB_RMOD, KC_SLEP,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -102,8 +106,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       //`--------------------------'  `--------------------------'
   ),
 
-#ifdef STENO_LAYER_ENABLE
-  [4] = LAYOUT_split_3x6_3_include( STENO_LAYER ),
+#if defined (STENO_LAYER_ENABLE) || defined (USER_KEYBOARD_STENO_ENABLE)
+  [_STENO] = LAYOUT_split_3x6_3_wrapper(STENO_LAYER),
 #endif
 };
 
@@ -209,7 +213,7 @@ bool oled_task_user(void) {
 
 void matrix_init_user(void) {
 #ifdef STENO_ENABLE
-    matrix_init_user_steno();
+    matrix_init_steno();
 #endif
 }
 
@@ -219,9 +223,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         set_keylog(keycode, record);
     }
 #endif
-#ifdef STENO_LAYER_ENABLE
-    return process_record_user_keyboard_steno(keycode, record);
-#else
-    return true;
+#ifdef USER_KEYBOARD_STENO_ENABLE
+    if (!process_record_keyboard_steno(keycode, record, _STENO, PLON, PLOFF)) {
+        return false;
+    }
 #endif
+    return true;
 }
