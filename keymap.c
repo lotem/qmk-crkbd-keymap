@@ -51,7 +51,6 @@ enum custom_keycodes {
 #define CM_ESC LCMD_T(KC_ESC)
 #define CM_ENT LCMD_T(KC_ENT)
 
-#define CT_DOT RCTL_T(KC_DOT)
 #define CT_SCLN RCTL_T(KC_SCLN)
 
 #define AL_Z LALT_T(KC_Z)
@@ -78,9 +77,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        STN_ON, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_PIPE, KC_BSLS,  KC_DEL,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-       ADJUST,  KC_GRV, KC_QUOT, KC_LPRN, KC_RPRN, KC_DQUO,                      KC_PLUS, KC_MINS, KC_UNDS, KC_COLN, CT_SCLN,  ADJUST,
+       ADJUST,  KC_GRV, KC_QUOT, KC_LPRN, KC_RPRN, KC_DQUO,                      KC_PLUS, KC_MINS, KC_UNDS, KC_COLN, KC_SCLN,  ADJUST,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, KC_TILD, KC_LBRC, KC_LCBR, KC_RCBR, KC_RBRC,                      KC_QUES,  KC_EQL, KC_LABK, KC_RABK, AL_SLSH, _______,
+      _______, KC_TILD, KC_LBRC, KC_LCBR, KC_RCBR, KC_RBRC,                      KC_QUES,  KC_EQL, KC_LABK, KC_RABK, KC_SLSH, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                            ADJUST, _______, _______,    _______, _______,  ADJUST
                                       //`--------------------------'  `--------------------------'
@@ -88,11 +87,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_RAISE] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      _______,  KC_INS, KC_HOME,   KC_UP,  KC_END,  KC_DEL,                      KC_PLUS,    KC_7,    KC_8,    KC_9, KC_COLN, _______,
+      _______,  KC_INS, KC_HOME,   KC_UP,  KC_END,  KC_DEL,                      KC_PLUS,    KC_7,    KC_8,    KC_9, KC_MINS, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-       ADJUST,  KC_ESC, KC_LEFT, KC_DOWN, KC_RGHT,  KC_TAB,                      KC_MINS,    KC_4,    KC_5,    KC_6,  CT_DOT,  ADJUST,
+       ADJUST,  KC_ESC, KC_LEFT, KC_DOWN, KC_RGHT,  KC_TAB,                       KC_DOT,    KC_4,    KC_5,    KC_6, KC_COLN,  ADJUST,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, KC_CAPS,  KC_APP, KC_PGUP, KC_PGDN, KC_BSPC,                         KC_0,    KC_1,    KC_2,    KC_3, AL_SLSH, _______,
+      _______, KC_CAPS,  KC_APP, KC_PGUP, KC_PGDN, KC_BSPC,                         KC_0,    KC_1,    KC_2,    KC_3, KC_SLSH, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                            ADJUST, _______, _______,    _______, _______,  ADJUST
                                       //`--------------------------'  `--------------------------'
