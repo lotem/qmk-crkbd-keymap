@@ -58,35 +58,30 @@ enum custom_keycodes {
 
 #define RA_QUOT LT(_RAISE, KC_QUOT)
 
-#define AD_DEL LT(_ADJUST, KC_DEL)
-
-#define LO_TAB LT(_LOWER, KC_TAB)
-#define LO_BSPC LT(_LOWER, KC_BSPC)
-
 #define LAYOUT_split_3x6_3_wrapper(...) LAYOUT_split_3x6_3(__VA_ARGS__)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ALPHA] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       ADJUST,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  AD_DEL,
+       KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
         RAISE,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, CT_SCLN, RA_QUOT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT,    AL_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, AL_SLSH, KC_RSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                           LO_TAB, KC_LCTL,  CM_ESC,     CM_ENT,  KC_SPC, LO_BSPC
+                                            LOWER, KC_LCTL,  CM_ESC,     CM_ENT,  KC_SPC,   LOWER
                                       //`--------------------------'  `--------------------------'
   ),
 
   [_LOWER] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       STN_ON, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_PIPE, KC_BSLS, _______,
+       STN_ON, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_PIPE, KC_BSLS,  KC_DEL,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______,  KC_GRV, KC_QUOT, KC_LPRN, KC_RPRN, KC_DQUO,                      KC_PLUS, KC_MINS, KC_UNDS, KC_COLN, KC_SCLN, _______,
+       ADJUST,  KC_GRV, KC_QUOT, KC_LPRN, KC_RPRN, KC_DQUO,                      KC_PLUS, KC_MINS, KC_UNDS, KC_COLN, KC_SCLN,  ADJUST,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, KC_TILD, KC_LBRC, KC_LCBR, KC_RCBR, KC_RBRC,                      KC_QUES,  KC_EQL, KC_LABK, KC_RABK, KC_SLSH, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______, _______, _______,    _______, _______, A(KC_BSPC)
+                                           ADJUST, _______, _______,    _______, _______,  ADJUST
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -94,11 +89,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       _______,  KC_INS, KC_HOME,   KC_UP,  KC_END,  KC_DEL,                      KC_PLUS,    KC_7,    KC_8,    KC_9, KC_MINS, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______,  KC_ESC, KC_LEFT, KC_DOWN, KC_RGHT,  KC_TAB,                       KC_DOT,    KC_4,    KC_5,    KC_6, KC_COLN, _______,
+       ADJUST,  KC_ESC, KC_LEFT, KC_DOWN, KC_RGHT,  KC_TAB,                       KC_DOT,    KC_4,    KC_5,    KC_6, KC_COLN,  ADJUST,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, KC_CAPS,  KC_APP, KC_PGUP, KC_PGDN, KC_BSPC,                         KC_0,    KC_1,    KC_2,    KC_3, KC_SLSH, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______, _______, _______,    _______, _______, _______
+                                           ADJUST, _______, _______,    _______, _______,  ADJUST
                                       //`--------------------------'  `--------------------------'
   ),
 
