@@ -48,64 +48,64 @@ enum custom_keycodes {
 #define OS_LCMD OSM(MOD_LGUI)
 #define OS_RCMD OSM(MOD_RGUI)
 
-#define CM_ESC LCMD_T(KC_ESC)
-#define CM_BSPC RCMD_T(KC_BSPC)
+#define LO_ENT LT(_LOWER, KC_ENT)
+
+#define RA_TAB LT(_RAISE, KC_TAB)
+#define RA_DEL LT(_RAISE, KC_DEL)
+
+#define CT_ESC LCTL_T(KC_ESC)
+#define CM_BSPC LCMD_T(KC_BSPC)
 
 #define CT_QUOT RCTL_T(KC_QUOT)
-
-#define LO_TAB LT(_LOWER, KC_TAB)
-#define LO_DEL LT(_LOWER, KC_DEL)
-
-#define RA_ENT LT(_RAISE, KC_ENT)
 
 #define LAYOUT_split_3x6_3_wrapper(...) LAYOUT_split_3x6_3(__VA_ARGS__)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ALPHA] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      KC_LALT,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_RALT,
+       ADJUST,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  ADJUST,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, CT_QUOT,
+      KC_LALT,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, CT_QUOT, KC_RALT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                           LO_TAB,  RA_ENT,  CM_ESC,    CM_BSPC,  KC_SPC,  LO_DEL
+                                           RA_TAB,  LO_ENT,  CT_ESC,    CM_BSPC,  KC_SPC,  RA_DEL
                                       //`--------------------------'  `--------------------------'
   ),
 
   [_LOWER] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       STN_ON, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_PIPE, KC_BSLS, _______,
+       KC_GRV,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_TILD,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______,  KC_GRV, KC_QUOT, KC_LPRN, KC_RPRN, KC_DQUO,                      KC_PLUS, KC_MINS, KC_UNDS, KC_COLN, KC_SCLN, _______,
+      _______, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_PLUS, KC_MINS,  KC_EQL, KC_LPRN, KC_RPRN, KC_UNDS,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, KC_TILD, KC_LBRC, KC_LCBR, KC_RCBR, KC_RBRC,                      KC_QUES,  KC_EQL, KC_LABK, KC_RABK, KC_SLSH, _______,
+      _______, KC_CIRC, KC_AMPR, KC_ASTR, KC_LCBR, KC_RCBR,                      KC_LBRC, KC_RBRC, KC_SCLN, KC_COLN, KC_BSLS, KC_PIPE,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                           ADJUST,  ADJUST, OS_LCMD,    OS_RCMD, _______,  ADJUST
+                                          _______, _______, OS_LCTL,    OS_LCMD, _______, _______
                                       //`--------------------------'  `--------------------------'
   ),
 
   [_RAISE] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      _______,  KC_INS, KC_HOME,   KC_UP,  KC_END,  KC_DEL,                      KC_PLUS,    KC_7,    KC_8,    KC_9, KC_MINS, _______,
+      STN_ON,   KC_ESC, KC_WH_U, KC_MS_U, KC_WH_D,S(KC_TAB),                   A(KC_BSPC),KC_PGUP,   KC_UP, KC_PGDN,  KC_INS, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______,  KC_ESC, KC_LEFT, KC_DOWN, KC_RGHT,  KC_TAB,                       KC_DOT,    KC_4,    KC_5,    KC_6, KC_COLN, _______,
+      _______, KC_CAPS, KC_MS_L, KC_MS_D, KC_MS_R,  KC_TAB,                      KC_BSPC, KC_LEFT, KC_DOWN, KC_RGHT,  KC_DEL, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, KC_CAPS,  KC_APP, KC_PGUP, KC_PGDN, KC_BSPC,                         KC_0,    KC_1,    KC_2,    KC_3, KC_SLSH, _______,
+      _______,  KC_APP, KC_BTN3, KC_BTN4, KC_BTN5,  KC_GRV,                      KC_TILD, KC_UNDS, KC_HOME,  KC_END, KC_PIPE, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                           ADJUST,  ADJUST, OS_LCMD,    OS_RCMD, _______,  ADJUST
+                                          KC_BTN2, KC_BTN1, OS_LCTL,    OS_LCMD, _______, _______
                                       //`--------------------------'  `--------------------------'
   ),
 
   [_ADJUST] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-        RESET,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                      KC_MPRV, KC_WH_U, KC_MS_U, KC_WH_D,RGB_RMOD, _______,
+        RESET,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                        KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,                      KC_MPLY, KC_MS_L, KC_MS_D, KC_MS_R, RGB_TOG, _______,
+      _______,  KC_F11,  KC_F12, KC_PSCR, XXXXXXX, XXXXXXX,                      XXXXXXX, KC_MPLY, KC_MPRV, KC_MNXT, XXXXXXX, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______,  KC_F11,  KC_F12, KC_PSCR, CG_TOGG, AG_TOGG,                      KC_MNXT, KC_MUTE, KC_VOLD, KC_VOLU, RGB_MOD, _______,
+      _______, CG_TOGG, AG_TOGG, RGB_TOG,RGB_RMOD, RGB_MOD,                      XXXXXXX, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_BTN3, _______, _______,    _______, KC_BTN1, KC_BTN2
+                                          _______, _______, OS_RCTL,    OS_RCMD, _______, _______
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -242,10 +242,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         // For all hold-tap thumb keys
-        case LO_TAB:
-        case LO_DEL:
-        case RA_ENT:
-        case CM_ESC:
+        case RA_TAB:
+        case RA_DEL:
+        case LO_ENT:
+        case CT_ESC:
         case CM_BSPC:
             // Immediately select the hold action when another key is pressed.
             return true;
