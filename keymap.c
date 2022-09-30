@@ -50,8 +50,8 @@ enum custom_keycodes {
 
 #define LO_ENT LT(_LOWER, KC_ENT)
 
-#define RA_TAB LT(_RAISE, KC_TAB)
-#define RA_DEL LT(_RAISE, KC_DEL)
+#define AL_TAB LALT_T(KC_TAB)
+#define AL_DEL RALT_T(KC_DEL)
 
 #define CT_ESC LCTL_T(KC_ESC)
 #define CM_BSPC LCMD_T(KC_BSPC)
@@ -65,11 +65,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        ADJUST,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  ADJUST,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LALT,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, CT_QUOT, KC_RALT,
+        RAISE,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, CT_QUOT,   RAISE,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                           RA_TAB,  LO_ENT,  CT_ESC,    CM_BSPC,  KC_SPC,  RA_DEL
+                                           AL_TAB,  LO_ENT,  CT_ESC,    CM_BSPC,  KC_SPC,  AL_DEL
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -242,11 +242,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         // For all hold-tap thumb keys
-        case RA_TAB:
-        case RA_DEL:
         case LO_ENT:
         case CT_ESC:
         case CM_BSPC:
+        case AL_TAB:
+        case AL_DEL:
             // Immediately select the hold action when another key is pressed.
             return true;
         default:
