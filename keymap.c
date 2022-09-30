@@ -50,10 +50,10 @@ enum custom_keycodes {
 
 #define LO_ENT LT(_LOWER, KC_ENT)
 
-#define AL_TAB LALT_T(KC_TAB)
+#define AL_ESC LALT_T(KC_ESC)
 #define AL_DEL RALT_T(KC_DEL)
 
-#define CT_ESC LCTL_T(KC_ESC)
+#define CT_TAB LCTL_T(KC_TAB)
 #define CM_BSPC LCMD_T(KC_BSPC)
 
 #define CT_QUOT RCTL_T(KC_QUOT)
@@ -69,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                           AL_TAB,  LO_ENT,  CT_ESC,    CM_BSPC,  KC_SPC,  AL_DEL
+                                           AL_ESC,  LO_ENT,  CT_TAB,    CM_BSPC,  KC_SPC,  AL_DEL
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -243,9 +243,9 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         // For all hold-tap thumb keys
         case LO_ENT:
-        case CT_ESC:
+        case CT_TAB:
         case CM_BSPC:
-        case AL_TAB:
+        case AL_ESC:
         case AL_DEL:
             // Immediately select the hold action when another key is pressed.
             return true;
