@@ -87,11 +87,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_RAISE] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      STN_ON,   KC_ESC, KC_WH_U, KC_MS_U, KC_WH_D,S(KC_TAB),                      KC_DEL, KC_PGUP,   KC_UP, KC_PGDN,  KC_INS, _______,
+      STN_ON,   KC_GRV, KC_WH_U, KC_MS_U, KC_WH_D,S(KC_TAB),                      KC_INS, KC_PGUP,   KC_UP, KC_PGDN, KC_TILD, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, KC_CAPS, KC_MS_L, KC_MS_D, KC_MS_R,  KC_TAB,                      KC_BSPC, KC_LEFT, KC_DOWN, KC_RGHT, KC_UNDS, _______,
+      _______, KC_CAPS, KC_MS_L, KC_MS_D, KC_MS_R,  KC_ESC,                       KC_DEL, KC_LEFT, KC_DOWN, KC_RGHT, KC_UNDS, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______,  KC_APP, KC_BTN3, KC_BTN4, KC_BTN5,  KC_GRV,                      KC_TILD,  KC_ENT, KC_HOME,  KC_END, KC_PIPE, _______,
+      _______,  KC_APP, KC_BTN3, KC_BTN4, KC_BTN5,  KC_TAB,                      KC_BSPC,  KC_ENT, KC_HOME,  KC_END, KC_PIPE, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_BTN2, KC_BTN1, OS_LCTL,    OS_LCMD, _______, _______
                                       //`--------------------------'  `--------------------------'
