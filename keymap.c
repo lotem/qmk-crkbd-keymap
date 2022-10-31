@@ -80,11 +80,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_RAISE] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       STN_ON, XXXXXXX,    KC_1,    KC_2,    KC_3, KC_VOLU,                      KC_HOME, KC_PGUP, KC_PGDN,  KC_END,  KC_DQT,  KC_DEL,
+       STN_ON, XXXXXXX,    KC_1,    KC_2,    KC_3, KC_COLN,                      KC_HOME, KC_PGUP, KC_PGDN,  KC_END,  KC_DQT,  KC_DEL,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, XXXXXXX,    KC_4,    KC_5,    KC_6, KC_VOLD,                      KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, KC_QUOT, _______,
+      _______, XXXXXXX,    KC_4,    KC_5,    KC_6,  KC_DOT,                      KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, KC_QUOT, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, KC_CAPS,    KC_7,    KC_8,    KC_9,    KC_0,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+      _______, KC_CAPS,    KC_7,    KC_8,    KC_9,    KC_0,                      XXXXXXX, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______,  ADJUST, OS_RCTL,    _______,  ADJUST, _______
                                       //`--------------------------'  `--------------------------'
