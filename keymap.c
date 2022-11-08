@@ -67,11 +67,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      _______,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, _______,
+       STN_ON,  KC_GRV, KC_LBRC, KC_LCBR, KC_RCBR, KC_TILD,                      KC_CIRC, KC_LPRN, KC_RPRN, KC_RBRC,  KC_DQT, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_CAPS, KC_LABK, KC_RABK, KC_LBRC, KC_RBRC, KC_BSLS,                       KC_GRV, KC_MINS,  KC_EQL, KC_SCLN, KC_QUOT, _______,
+      KC_CAPS, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_AMPR, KC_MINS,  KC_EQL, KC_BSLS, KC_QUOT, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, KC_HOME,  KC_END, KC_PGUP, KC_PGDN,  KC_INS,                      KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT,  KC_DEL, _______,
+      _______, KC_QUES, KC_COLN, KC_LABK, KC_RABK, KC_SCLN,                      KC_ASTR, KC_UNDS, KC_PLUS, KC_PIPE, KC_SLSH, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           OS_LCMD,  ADJUST, OS_LCTL,    _______,  ADJUST, OS_LALT
                                       //`--------------------------'  `--------------------------'
@@ -79,9 +79,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_RAISE] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       STN_ON, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_SLSH, KC_QUES, _______,
+      _______,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_CAPS, KC_LPRN, KC_RPRN, KC_LCBR, KC_RCBR, KC_PIPE,                      KC_TILD, KC_UNDS, KC_PLUS, KC_COLN,  KC_DQT, _______,
+      _______, KC_CAPS, KC_HOME, KC_PGUP, KC_PGDN,  KC_END,                      KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT,  KC_DEL, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -93,11 +93,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
         RESET,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                        KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10, KC_SLEP,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______,  KC_F11,  KC_F12, KC_PSCR,  KC_INS,  KC_DEL,                      KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, XXXXXXX, _______,
+      _______,  KC_F11,  KC_F12, KC_PSCR,  KC_INS,  KC_DEL,                      KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_BTN1, KC_BTN2,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, CG_TOGG, AG_TOGG,RGB_RMOD, RGB_MOD, RGB_TOG,                      KC_WH_U, KC_WH_D, KC_BTN4, KC_BTN5, XXXXXXX, _______,
+      _______, CG_TOGG, AG_TOGG,RGB_RMOD, RGB_MOD, RGB_TOG,                      KC_WH_U, KC_WH_D, KC_BTN4, KC_BTN5, KC_BTN3, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______, KC_BTN3, _______,    KC_BTN1, KC_BTN2, _______
+                                          _______, _______, _______,    KC_BTN1, KC_BTN2, _______
                                       //`--------------------------'  `--------------------------'
   ),
 
